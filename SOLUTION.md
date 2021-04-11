@@ -38,14 +38,14 @@
 
  - ¿Deben ser las excepciones en `SabanaPayroll` controladas o propagadas?.
 
- Deben ser controladas ya que las prubas no deben ser modificadas, por lo cual deben retornar true o false
+ Deben ser controladas ya que las pruebas no deben ser modificadas, por lo cual deben retornar true o false
 
 
  ## Parte 5
 
- para la clase bankAccount decidimos crear una excepcion para el metodo depositar, para ello creamos una clase excepción llamada bankAccountException en donde hay una excepción llamada ILEGAL_VALUE la cual se lanza cuando se intenta depositar un valor menor o igual al DEPOSIT_DISCOUNT.
+ ### Para la clase bankAccount decidimos crear una excepcion para el metodo depositar, para ello creamos una clase excepción llamada bankAccountException en donde hay una excepción llamada ILEGAL_VALUE la cual se lanza cuando se intenta depositar un valor menor o igual al DEPOSIT_DISCOUNT.
 
- ## Evidecia
+ ## Evidencia
 
  ![](img/EVI1.png)
 
