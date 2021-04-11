@@ -120,20 +120,20 @@ public class SabanaPayrollTest {
     }
 
     @Test
-    public void assigneColsubsidioFamilyCompensation() {
+    public void assigneColsubsidioFamilyCompensation()  {
 
         boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeBySalary);
         assertTrue(result);
     }
     @Test
-    public void NotassigneColsubsidioFamilyCompensation() {
+    public void NotassigneColsubsidioFamilyCompensation(){
 
         boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeByCommission);
         assertFalse(result);
     }
 
     @Test
-    public void assigneCompensarFamilyCompensation() {
+    public void assigneCompensarFamilyCompensation(){
 
         boolean result = s.assigneFamilyCompensation(CompensarFund.class.getSimpleName(), employeeBySalary);
         assertTrue(result);

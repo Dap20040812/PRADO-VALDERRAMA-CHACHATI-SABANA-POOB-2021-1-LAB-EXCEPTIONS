@@ -16,7 +16,7 @@ public class CheckingTest {
     }
 
     @Test
-    public void shouldDepositAmount() {
+    public void shouldDepositAmount() throws BankAccountException {
         Checking account = new Checking();
         boolean result = account.deposit(10000);
 
@@ -25,16 +25,15 @@ public class CheckingTest {
     }
 
     @Test
-    public void shouldNotDepositAmount() {
+    public void shouldNotDepositAmount() throws BankAccountException {
         Checking account = new Checking();
-
-        assertFalse(account.deposit(4000));
-        assertFalse(account.deposit(5000));
+        Exception e = assertThrows(BankAccountException.class, () -> account.deposit(4000));
+        assertEquals(BankAccountException.ILEGAL_VALUE,e.getMessage());
         assertTrue(Double.compare(0, account.getBalance()) == 0);
     }
 
     @Test
-    public void shouldProcessCheck() {
+    public void shouldProcessCheck() throws BankAccountException {
         Checking account = new Checking();
         Check check = new Check(10000, LocalDate.now().plusMonths(1));
 
@@ -43,7 +42,7 @@ public class CheckingTest {
     }
 
     @Test
-    public void shouldNotProcessCheck() {
+    public void shouldNotProcessCheck() throws BankAccountException {
         Checking account = new Checking();
 
         assertFalse(account.processCheck(new Check(5000, LocalDate.now().plusMonths(1))));
@@ -53,18 +52,13 @@ public class CheckingTest {
     }
 
     @Test
-    public void shouldKeepBalance() {
+    public void shouldKeepBalance() throws BankAccountException {
         Checking account = new Checking();
 
         assertTrue(account.deposit(11000)); //6000
-        assertFalse(account.deposit(4000));
-        assertFalse(account.deposit(5000));
         assertTrue(account.deposit(21000)); // 16000
 
         assertTrue(account.processCheck(new Check(15000, LocalDate.now().plusMonths(1)))); // 10000
-        assertFalse(account.processCheck(new Check(5000, LocalDate.now().plusMonths(1))));
-        assertFalse(account.processCheck(new Check(4000, LocalDate.now().plusMonths(1))));
-        assertFalse(account.processCheck(new Check(10000, LocalDate.now().minusMonths(1))));
 
         assertTrue(Double.compare(32000, account.getBalance()) == 0);
     }

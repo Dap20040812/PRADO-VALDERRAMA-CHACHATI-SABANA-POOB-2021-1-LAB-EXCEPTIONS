@@ -14,9 +14,14 @@ public class CafamFund implements IFamilyCompensationFund {
      * @return True si puede registrar al empleado - False si no
      */
     @Override
-    public boolean registerEmployee(Employee employee) {
+    public boolean registerEmployee(Employee employee) throws FamilyCompensationFundException {
 
-        return registeredEmployees.add(employee);
+        boolean result = registeredEmployees.add(employee);
+        if(!result)
+        {
+            throw new FamilyCompensationFundException(FamilyCompensationFundException.EMPLOYEE_REGISTERED);
+        }
+        return result;
     }
     /**
      * Elimina un empleado con un id dado
@@ -24,7 +29,7 @@ public class CafamFund implements IFamilyCompensationFund {
      * @return True si puede eliminar el empleado - False si no
      */
     @Override
-    public boolean deleteEmployee(UUID id) {
+    public boolean deleteEmployee(UUID id) throws FamilyCompensationFundException {
 
         boolean result = false;
         Iterator<Employee> it = registeredEmployees.iterator();
@@ -36,7 +41,11 @@ public class CafamFund implements IFamilyCompensationFund {
                 result = true;
             }
         }
-        return result;
+        if(!result)
+        {
+            throw new FamilyCompensationFundException(FamilyCompensationFundException.EMPLOYEE_IS_NOT_REGISTERED);
+        }
+        return true;
     }
     /**
      * Verifica que un empleado de un id dado este registrado

@@ -16,7 +16,7 @@ public class Checking extends BankAccount {
      * <br><br>
      * @return el porcentaje depositado en la cuenta.
      */
-    public boolean processCheck(Check check){
+    public boolean processCheck(Check check) throws BankAccountException {
         boolean result = false;
 
         if(check.getAmount() > DEPOSIT_DISCOUNT && LocalDate.now().isBefore(check.getExpirationDate()))

@@ -27,8 +27,14 @@ public class SabanaPayroll {
      */
     public boolean assigneFamilyCompensation(String IFamilyCompensationFund, Employee employee) {
 
-        boolean result = false;
-        result = compensationFunds.get(IFamilyCompensationFund).registerEmployee(employee);
+        boolean result = true;
+        try {
+            compensationFunds.get(IFamilyCompensationFund).registerEmployee(employee);
+        }
+        catch (FamilyCompensationFundException e)
+        {
+            result = false;
+        }
         return result;
     }
 
@@ -105,7 +111,7 @@ public class SabanaPayroll {
     {
         BankAccount a = null;
         boolean isEmployee = false;
-        boolean result = false;
+        boolean result = true;
         for (int i=0;i<this.departments.size() && !isEmployee; i++)
         {
             a = departments.get(i).findEmployeeAccount(idEmployee);
@@ -115,7 +121,13 @@ public class SabanaPayroll {
             }
 
         }
-        result = a.deposit(amount);
+        try {
+            a.deposit(amount);
+        }
+        catch (BankAccountException e)
+        {
+            result=false;
+        }
         return result;
     }
     public double calculateEmployeeBalance(UUID idEmployee)

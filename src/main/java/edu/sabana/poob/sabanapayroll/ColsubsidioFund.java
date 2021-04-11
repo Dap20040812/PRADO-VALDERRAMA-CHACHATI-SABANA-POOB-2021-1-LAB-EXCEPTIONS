@@ -18,18 +18,19 @@ public class ColsubsidioFund implements IFamilyCompensationFund {
      * @return True si puede registrar al empleado - False si no
      */
     @Override
-    public boolean registerEmployee(Employee employee) {
+    public boolean registerEmployee(Employee employee) throws FamilyCompensationFundException{
 
-        boolean result = false;
-        if(employee.getClass() != EmployeeByCommission.class)
+        if(employee.getClass() == EmployeeByCommission.class)
         {
-           if(!isEmployeeRegistered(employee.getId()))
-           {
-               registeredEmployees.put(employee.getId(),employee);
-               result = true;
-           }
+            throw new FamilyCompensationFundException(FamilyCompensationFundException.EMPLOYEE_NOT_ALLOWED);
         }
-        return result;
+        if(isEmployeeRegistered(employee.getId()))
+        {
+            throw new FamilyCompensationFundException(FamilyCompensationFundException.EMPLOYEE_REGISTERED);
+        }
+        registeredEmployees.put(employee.getId(),employee);
+        return true;
+
     }
     /**
      * Elimina un empleado con un id dado
@@ -37,16 +38,14 @@ public class ColsubsidioFund implements IFamilyCompensationFund {
      * @return True si puede eliminar el empleado - False si no
      */
     @Override
-    public boolean deleteEmployee(UUID id) {
+    public boolean deleteEmployee(UUID id) throws FamilyCompensationFundException {
 
-        boolean result = false;
-
-        if(isEmployeeRegistered(id))
+        if(!isEmployeeRegistered(id))
         {
-            registeredEmployees.remove(id);
-            result = true;
+            throw new FamilyCompensationFundException(FamilyCompensationFundException.EMPLOYEE_IS_NOT_REGISTERED);
         }
-        return result;
+        registeredEmployees.remove(id);
+        return true;
     }
     /**
      * Verifica que un empleado de un id dado este registrado

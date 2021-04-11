@@ -16,7 +16,7 @@ public class Savings extends BankAccount {
      * <br><br>
      * @return el porcentaje depositado en la cuenta.
      */
-    public double depositMontlyInterest(){
+    public double depositMontlyInterest() throws BankAccountException {
 
         deposit(getBalance()*ANNUAL_INTEREST_RATE/12 + DEPOSIT_DISCOUNT);
         return getBalance()*ANNUAL_INTEREST_RATE/12;
