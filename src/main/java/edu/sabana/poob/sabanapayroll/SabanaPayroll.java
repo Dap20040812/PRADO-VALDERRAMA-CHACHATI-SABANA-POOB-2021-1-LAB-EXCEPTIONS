@@ -22,12 +22,22 @@ public class SabanaPayroll {
     /**
      * Asigna a un emplado una caja de compensacion especifica
      * @param IFamilyCompensationFund
-     * @param employee
+     * @param employeeId
      * @return True si puede registrar al empleado - False si no
      */
-    public boolean assigneFamilyCompensation(String IFamilyCompensationFund, Employee employee) {
+    public boolean assigneFamilyCompensation(String IFamilyCompensationFund, UUID employeeId) {
 
         boolean result = true;
+        boolean result1 = false;
+        Employee employee = null;
+        Iterator<Employee> it = employees.iterator();
+        while (!result1 && it.hasNext()) {
+            Employee employee1 = it.next();
+            if (employee1.getId() == employeeId) {
+                employee = employee1;
+                result1 = true;
+            }
+        }
         try {
             compensationFunds.get(IFamilyCompensationFund).registerEmployee(employee);
         }

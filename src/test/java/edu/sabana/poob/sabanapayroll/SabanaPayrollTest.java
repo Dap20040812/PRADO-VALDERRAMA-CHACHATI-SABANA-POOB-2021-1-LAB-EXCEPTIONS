@@ -122,32 +122,32 @@ public class SabanaPayrollTest {
     @Test
     public void assigneColsubsidioFamilyCompensation()  {
 
-        boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeBySalary);
+        boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeBySalary.getId());
         assertTrue(result);
     }
     @Test
     public void NotassigneColsubsidioFamilyCompensation(){
 
-        boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeByCommission);
+        boolean result = s.assigneFamilyCompensation(ColsubsidioFund.class.getSimpleName(), employeeByCommission.getId());
         assertFalse(result);
     }
 
     @Test
     public void assigneCompensarFamilyCompensation(){
 
-        boolean result = s.assigneFamilyCompensation(CompensarFund.class.getSimpleName(), employeeBySalary);
+        boolean result = s.assigneFamilyCompensation(CompensarFund.class.getSimpleName(), employeeBySalary.getId());
         assertTrue(result);
     }
     @Test
     public void NotassigneCompensarFamilyCompensation() {
 
-        boolean result = s.assigneFamilyCompensation(CompensarFund.class.getSimpleName(), employeeByHours);
+        boolean result = s.assigneFamilyCompensation(CompensarFund.class.getSimpleName(), employeeByHours.getId());
         assertFalse(result);
     }
     @Test
     public void assigneCafamFamilyCompensation() {
 
-        boolean result = s.assigneFamilyCompensation(CafamFund.class.getSimpleName(), employeeBySalary);
+        boolean result = s.assigneFamilyCompensation(CafamFund.class.getSimpleName(), employeeBySalary.getId());
         assertTrue(result);
     }
 }
